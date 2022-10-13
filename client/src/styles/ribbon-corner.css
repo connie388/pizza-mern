@@ -1,0 +1,17 @@
+/* For styling the corner ribbon of menu items */
+.parent {
+  overflow: hidden; /* required */
+  position: relative;
+}
+
+.ribbon {
+  position: absolute;
+  background: white;
+  color: black;
+  transform: rotate(-45deg);
+  text-align: center;
+  top: 32px;
+  left: -32px;
+  width: 145px;
+  z-index: 10;
+}
