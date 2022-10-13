@@ -26,29 +26,29 @@ function Navbar({ item, setItem }) {
       </a> */}
       <a
         href="#"
-        className={item === "pizzas" ? "active" : "navitem"}
-        onClick={() => changeActiveItem("pizzas")}
+        className={item === "pizza" ? "active" : "navitem"}
+        onClick={() => changeActiveItem("pizza")}
       >
         Pizzas
       </a>
       <a
         href="#"
-        className={item === "sandwiches" ? "active" : "navitem"}
-        onClick={() => changeActiveItem("sandwiches")}
+        className={item === "sandwich" ? "active" : "navitem"}
+        onClick={() => changeActiveItem("sandwich")}
       >
         Sandwiches
       </a>
       <a
         href="#"
-        className={item === "pastas" ? "active" : "navitem"}
-        onClick={() => changeActiveItem("pastas")}
+        className={item === "pasta" ? "active" : "navitem"}
+        onClick={() => changeActiveItem("pasta")}
       >
         Pastas
       </a>
       <a
         href="#"
-        className={item === "sides" ? "active" : "navitem"}
-        onClick={() => changeActiveItem("sides")}
+        className={item === "side" ? "active" : "navitem"}
+        onClick={() => changeActiveItem("side")}
       >
         Sides
       </a>

@@ -81,12 +81,28 @@ exports.create = (req, res) => {
 //     "category": "634751e69e23c5f0236bd40d",
 exports.findAll = async (req, res) => {
   var condition = {};
-  if (req.query.category) {
-    let data = await MenuCategoryModel.findOne({
-      category: req.query.category,
-    });
 
-    condition = { category: data._id };
+  if (req.query.category) {
+    try {
+      let data = await MenuCategoryModel.findOne({
+        category: req.query.category,
+      });
+      if (data) {
+        condition = { category: data._id };
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: error.message || "Category not found",
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message:
+          error.message ||
+          "Some error occurred while retrieving the menu by the provided category.",
+      });
+    }
   }
 
   MenuModel.find(condition)
@@ -94,13 +110,11 @@ exports.findAll = async (req, res) => {
     .populate("choice", "size amount information")
     .then((menu) => res.status(200).json({ success: true, menu }))
     .catch((error) =>
-      res
-        .status(500)
-        .json({
-          success: false,
-          message:
-            error.message || "Some error occurred while retrieving the menu.",
-        })
+      res.status(500).json({
+        success: false,
+        message:
+          error.message || "Some error occurred while retrieving the menu.",
+      })
     );
 };
 

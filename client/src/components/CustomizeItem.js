@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/collapsible.css";
 import Toppings from "./Toppings";
 import { Collapsible } from "../util/Collapsible";
 import { RadioButton } from "../util/RadioButton";
 import DisplayImageList from "./DisplayImageList";
 import { sauces } from "../data/sauces";
-import { addons } from "../data/addons";
+// import { addons } from "../data/addons";
 import { cheese } from "../data/cheese";
+const axios = require("axios").default;
 
 function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
+  const [toppings, setToppings] = useState();
   const [selectedDough, setSelectedDough] = useState();
   const [selectedCrust, setSelectedCrust] = useState();
   const [selectedCook, setSelectedCook] = useState();
@@ -19,17 +21,34 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
   });
 
   const [checkedState, setCheckedState] = useState(
-    Array.from({ length: addons.type.length }, () =>
-      Array.from({ length: 100 }, () => false)
-    )
+    Array.from({ length: 10 }, () => Array.from({ length: 100 }, () => false))
   );
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/pizza/v1.0.0/order/toppings`)
+      .then(function (response) {
+        // handle success
+        // console.log(response.data.toppings);
+        // console.log("item =" + item);
+        setToppings(response.data.toppings);
+        // console.log(JSON.stringify(menu));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }, []);
 
   function getToppings() {
     let addOnList = [];
 
-    for (var j = 0; j < addons.type?.length; j++) {
-      let addon = addons.type[j];
-      var checkboxes = document.getElementsByName("000" + "-" + addon.name);
+    for (var j = 0; j < toppings?.length; j++) {
+      let addon = toppings[j];
+      var checkboxes = document.getElementsByName("000" + "-" + addon.category);
       if (checkboxes && checkboxes.length > 0) {
         let list = [];
         for (var i = 0; i < checkboxes.length; i++) {
@@ -40,7 +59,7 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
 
         if (list.length > 0) {
           let listData = {
-            name: addon.name,
+            name: addon.category,
             price: addon.price,
             list: list,
           };
@@ -249,7 +268,7 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
             recordNo="000"
             checkedState={checkedState}
             setCheckedState={setCheckedState}
-            toppings={addons.type}
+            toppings={toppings}
           />
         </div>
       </Collapsible>

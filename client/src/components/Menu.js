@@ -5,12 +5,14 @@ import "../styles/image-button.css";
 import Modal from "../util/Modal";
 import Toppings from "./Toppings";
 import Customize from "./Customize";
-import { menuItems } from "../data/menuItems";
-import { addons } from "../data/addons";
 import orderItem from "../util/orderItem";
 import SelectList from "../util/SelectList";
+const axios = require("axios").default;
 
 function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
+  const [menu, setMenu] = useState();
+  const [toppings, setToppings] = useState();
+
   const [show, setShow] = useState(false); // for Modal
   const [selected, setSelected] = useState([]);
   // select list's choices
@@ -18,28 +20,27 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
   const [canChoose, setCanChoose] = useState([]);
 
   const [checkedState, setCheckedState] = useState(
-    Array.from({ length: addons.type.length }, () =>
+    Array.from({ length: 10 }, () =>
       Array.from({ length: 100 }, () => false)
     )
   );
-
-  useEffect(() => {
-    setSelected([]);
-  }, [item]);
 
   const showModal = (recordNo, data, canChooseItems) => {
     setShow(true);
     setItemNo(recordNo);
     setCurrentData(data);
-    let toppings = addons.type.filter((d, i) =>
-      canChooseItems.includes(d.name)
-    );
-    setCanChoose(toppings);
+
+    let findItems = toppings.filter((d, i) => {
+      return canChooseItems.includes(d.id);
+    });
+
+    setCanChoose(findItems);
+    // console.log("find items = " + JSON.stringify(findItems));
   };
 
   const onSubmitModal = () => {
     // orderItem(itemNo, currentData);
-    orderItem(itemNo, currentData, setCurrentData, order, setOrder);
+    orderItem(itemNo, currentData, setCurrentData, order, setOrder, toppings);
     hideModal();
   };
 
@@ -47,9 +48,9 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
     setShow(false);
     setItemNo(-1);
 
-    if (addons.type) {
-      for (var j = 0; j < addons.type.length; j++) {
-        var checkboxes = document.getElementsByName(addons.type[j].name);
+    if (toppings) {
+      for (var j = 0; j < toppings.length; j++) {
+        var checkboxes = document.getElementsByName(toppings[j].name);
         if (checkboxes && checkboxes.length > 0) {
           for (var i = 0; i < checkboxes.length; i++) {
             checkboxes[i].checked = false;
@@ -57,35 +58,70 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
         }
       }
     }
-    let arr = Array.from({ length: addons.type.length }, () =>
+    let arr = Array.from({ length: toppings.length }, () =>
       Array.from({ length: 100 }, () => false)
     );
 
     setCheckedState(arr);
   };
 
+  useEffect(() => {
+    setSelected([]);
+    axios
+      .get(`http://localhost:4000/pizza/v1.0.0/order/menu?category=${item}`)
+      .then(function (response) {
+        setMenu(response.data.menu);
+      })
+      .catch(function (error) {
+        setMenu(null);
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }, [item]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/pizza/v1.0.0/order/toppings`)
+      .then(function (response) {
+        // handle success
+        // console.log(response.data.toppings);
+        // console.log("item =" + item);
+        setToppings(response.data.toppings);
+        // console.log(JSON.stringify(menu));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }, []);
   const getJson = () => {
-    let json = {};
-    switch (item) {
-      case "pizzas":
-        json = menuItems.pizzas;
-        break;
-      case "sandwiches":
-        json = menuItems.sandwiches;
-        break;
-      case "pastas":
-        json = menuItems.pastas;
-        break;
-      case "sides":
-        json = menuItems.sides;
-        break;
-      case "drink":
-        json = menuItems.drink;
-        break;
-      default:
-        json = menuItems.pizzas;
-    }
-    return json;
+    // let json = {};
+    // switch (item) {
+    //   case "pizzas":
+    //     json = menuItems.pizzas;
+    //     break;
+    //   case "sandwiches":
+    //     json = menuItems.sandwiches;
+    //     break;
+    //   case "pastas":
+    //     json = menuItems.pastas;
+    //     break;
+    //   case "sides":
+    //     json = menuItems.sides;
+    //     break;
+    //   case "drink":
+    //     json = menuItems.drink;
+    //     break;
+    //   default:
+    //     json = menuItems.pizzas;
+    // }
+    // return json;
+    return menu;
   };
 
   function onSelectChange(event, recordNo) {
@@ -121,7 +157,10 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
                 <div id="data-name" className="item-name">
                   {data.name}
                 </div>
-                <div id="data-calory" className="regular-font font-weight-light">
+                <div
+                  id="data-calory"
+                  className="regular-font font-weight-light"
+                >
                   {data.calory}
                 </div>
                 <div
@@ -133,12 +172,13 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
               </div>
             </Customize>
             <div>
-              {data.addons ? (
+              {data.addons.length > 0 ? (
                 <a
                   href="#"
                   className="regular-font font-weight-light"
                   onClick={(e) => {
                     showModal(recordNo, data, data.addons);
+                    // console.log("addon=" + JSON.stringify(data.addons));
                   }}
                 >
                   Addons +
@@ -166,7 +206,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
             ) : (
               <></>
             )}
-            {data.hasOwnProperty("type") ? (
+            {data.hasOwnProperty("type") && data.type.length > 0 ? (
               <SelectList
                 id={"myList" + recordNo}
                 recordNo={recordNo}
@@ -185,11 +225,37 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
             ) : (
               <></>
             )}
+            {data.hasOwnProperty("choice") && data.choice.length > 0 ? (
+              <SelectList
+                id={"myList" + recordNo}
+                recordNo={recordNo}
+                value={selected[recordNo]}
+                onSelectChange={onSelectChange}
+                classNm="dropdown"
+              >
+                {data.choice.map((record, idx) => {
+                  return (
+                    <option key={idx} value={record.amount}>
+                      {record.size} {record.information}
+                    </option>
+                  );
+                })}
+              </SelectList>
+            ) : (
+              <></>
+            )}
             <button
               id={"select-button" + recordNo}
               type="submit"
               onClick={(e) => {
-                orderItem(recordNo, data, setCurrentData, order, setOrder);
+                orderItem(
+                  recordNo,
+                  data,
+                  setCurrentData,
+                  order,
+                  setOrder,
+                  toppings
+                );
               }}
               className="select-button"
             >
