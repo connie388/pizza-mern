@@ -1,0 +1,3 @@
+{"_id":{"$oid":"63462574410ceef5e6500bd2"},"category":"meat","price":{"$numberDecimal":"2.00"}}
+{"_id":{"$oid":"63462610410ceef5e6500bd3"},"category":"cheese","price":{"$numberDecimal":"1.5"}}
+{"_id":{"$oid":"6346262b410ceef5e6500bd4"},"category":"vegetable","price":{"$numberDecimal":"1.50"}}

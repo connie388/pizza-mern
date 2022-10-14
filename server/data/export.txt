@@ -1,0 +1,9 @@
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection  menus --out  menus.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection   menucategories --out   menucategories.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection  menuchoices --out  menuchoices.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection menuchoicebycategories --out menuchoicebycategories.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection cheesetypes --out cheesetypes.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection  sauceamounttypes --out  sauceamounttypes.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection  saucetypes --out  saucetypes.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection toppingcategories --out toppingcategories.json
+mongoexport --uri mongodb+srv://<username>@<atlas-cluster-url>.mongodb.net/pizza --collection toppings --out toppings.json

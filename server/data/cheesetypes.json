@@ -1,0 +1,4 @@
+{"_id":{"$oid":"6346273e410ceef5e6500bd9"},"name":"Regular Mozzarella","desc":"Mozzarella is the one cheese pizza needs, and ours is made with 100% Canadian milk. It has a milky and buttery taste."}
+{"_id":{"$oid":"63462760410ceef5e6500bda"},"name":"Easy on Cheese"}
+{"_id":{"$oid":"63462776410ceef5e6500bdb"},"name":"Daiya Dairy Free Mozzarella Style Shreds","desc":"Certified vegan, GMO, dairy, gluten and soy-free, it melts, tastes and stretches much like regular mozzarella.","image":"https://weborders.pizzanova.com/PNStatic/web/images/Size552x426/DAIRYFREEMOZA.jpg"}
+{"_id":{"$oid":"634627b7410ceef5e6500bdc"},"name":"No Cheese"}

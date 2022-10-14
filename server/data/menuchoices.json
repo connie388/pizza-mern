@@ -1,0 +1,24 @@
+{"_id":{"$oid":"63474e7d9e23c5f0236bd403"},"menu":{"$oid":"63474e5046d5318365d1f180"},"size":"Family","amount":{"$numberDecimal":"18.99"},"information":"Serves 4"}
+{"_id":{"$oid":"63474f53778b68579b00b319"},"menu":{"$oid":"63474e5046d5318365d1f180"},"size":"Regular","amount":{"$numberDecimal":"11.99"},"information":"Serves 2"}
+{"_id":{"$oid":"63474fbd778b68579b010fb9"},"menu":{"$oid":"63474f9646d5318365d1f182"},"size":"Regular","amount":{"$numberDecimal":"11.99"},"information":"Serves 2"}
+{"_id":{"$oid":"63474fcb778b68579b011bde"},"menu":{"$oid":"63474f9646d5318365d1f182"},"size":"Family","amount":{"$numberDecimal":"18.99"},"information":"Serves 4"}
+{"_id":{"$oid":"63475031778b68579b017308"},"menu":{"$oid":"6347500646d5318365d1f184"},"size":"Regular","amount":{"$numberDecimal":"13.98"},"information":"Serves 2"}
+{"_id":{"$oid":"6347504c778b68579b018a4e"},"menu":{"$oid":"6347500646d5318365d1f184"},"size":"Family","amount":{"$numberDecimal":"22.98"},"information":"Serves 4"}
+{"_id":{"$oid":"6347528e778b68579b039c41"},"menu":{"$oid":"6347524f1582c8f19800d457"},"size":"No Bacon","amount":{"$numberDecimal":"8.99"},"information":"580 Cals/each"}
+{"_id":{"$oid":"634752bf778b68579b03c5d2"},"menu":{"$oid":"6347524f1582c8f19800d457"},"size":"With Bacon","amount":{"$numberDecimal":"10.59"},"information":"670 Cals/each"}
+{"_id":{"$oid":"63475433778b68579b0503f7"},"menu":{"$oid":"634753f11582c8f19800d460"},"size":"Half Garlic Bread","amount":{"$numberDecimal":"11.99"},"information":"1100 Cals/each"}
+{"_id":{"$oid":"63475458778b68579b052434"},"menu":{"$oid":"634753f11582c8f19800d460"},"size":"Half Garlic Bread with Cheese","amount":{"$numberDecimal":"12.79"},"information":"1250 Cals/each"}
+{"_id":{"$oid":"63498123778b68579be2e2c1"},"menu":{"$oid":"63498067778b68579be242ed"},"size":"2 Liter","amount":{"$numberDecimal":"3.99"},"information":"Serves 8"}
+{"_id":{"$oid":"63498140778b68579be2fb4c"},"menu":{"$oid":"63498067778b68579be242ed"},"size":"591ml Bottle","amount":{"$numberDecimal":"2.99"},"information":"Serves 1"}
+{"_id":{"$oid":"634981d8778b68579be37afc"},"menu":{"$oid":"634981a6778b68579be350ec"},"size":"2 Liter","amount":{"$numberDecimal":"3.99"},"information":"Serves 8 110 Cals/serving"}
+{"_id":{"$oid":"63498202778b68579be39d6f"},"menu":{"$oid":"634981a6778b68579be350ec"},"size":"591ml Bottle","amount":{"$numberDecimal":"2.99"},"information":"Serves 1 260 Cals/serving"}
+{"_id":{"$oid":"63498316778b68579be48704"},"menu":{"$oid":"634982d7778b68579be452f6"},"size":"Large","amount":{"$numberDecimal":"8.29"},"information":"10 sticks 190-230 Cals/stick"}
+{"_id":{"$oid":"6349831bdf528bcc16905640"},"menu":{"$oid":"634982d7778b68579be452f6"},"size":"Regular","amount":{"$numberDecimal":"5.29"},"information":"5 sticks 190 Cals/stick"}
+{"_id":{"$oid":"6349842e778b68579be574cc"},"menu":{"$oid":"634983c8778b68579be51bfc"},"size":"Creamy Garlic Dip","amount":{"$numberDecimal":"11.29"},"information":"210 Cals/dip"}
+{"_id":{"$oid":"63498445778b68579be58971"},"menu":{"$oid":"634983c8778b68579be51bfc"},"size":"Marinara","amount":{"$numberDecimal":"11.29"},"information":"30 Cals/dip"}
+{"_id":{"$oid":"63498466778b68579be5a5a7"},"menu":{"$oid":"634983c8778b68579be51bfc"},"size":"Peppercorn Ranch Dip","amount":{"$numberDecimal":"11.29"},"information":"190 Cals/dip"}
+{"_id":{"$oid":"6349847d778b68579be5bac5"},"menu":{"$oid":"634983c8778b68579be51bfc"},"size":"Cheddar Jalapeno Dip","amount":{"$numberDecimal":"11.29"},"information":"170 Cals/dip"}
+{"_id":{"$oid":"634985c0778b68579be6d0b0"},"menu":{"$oid":"63498590778b68579be6a7b0"},"size":"Large","amount":{"$numberDecimal":"9.29"},"information":"Serves 2"}
+{"_id":{"$oid":"634985de778b68579be6e94b"},"menu":{"$oid":"63498590778b68579be6a7b0"},"size":"Regular","amount":{"$numberDecimal":"6.29"},"information":"Serves 1"}
+{"_id":{"$oid":"63498698778b68579be78658"},"menu":{"$oid":"6349867e778b68579be76eda"},"size":"Large","amount":{"$numberDecimal":"9.29"},"information":"Serves 2"}
+{"_id":{"$oid":"634986a6778b68579be791aa"},"menu":{"$oid":"6349867e778b68579be76eda"},"size":"Regular","amount":{"$numberDecimal":"6.29"},"information":"Serves 1"}

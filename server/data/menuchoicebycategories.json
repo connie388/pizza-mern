@@ -1,0 +1,5 @@
+{"_id":{"$oid":"634737949e23c5f0236bd3f2"},"shape":"circle","size":"small","amount":{"$numberDecimal":"6.99"},"information":"6 slices","category":{"$oid":"634733979e23c5f0236bd3ef"}}
+{"_id":{"$oid":"634738319e23c5f0236bd3f3"},"shape":"circle","size":"medium","amount":{"$numberDecimal":"14.99"},"information":"8 slices","category":{"$oid":"634733979e23c5f0236bd3ef"}}
+{"_id":{"$oid":"6347385c9e23c5f0236bd3f4"},"shape":"circle","size":"Large","amount":{"$numberDecimal":"19.99"},"information":"10 slices","category":{"$oid":"634733979e23c5f0236bd3ef"}}
+{"_id":{"$oid":"6347388b9e23c5f0236bd3f5"},"shape":"circle","size":"X-Large","amount":{"$numberDecimal":"25.99"},"information":"12 slices","category":{"$oid":"634733979e23c5f0236bd3ef"}}
+{"_id":{"$oid":"634738c09e23c5f0236bd3f6"},"shape":"rectangle","size":"21\"x15\" Party","amount":{"$numberDecimal":"28.99"},"information":"24 slices","category":{"$oid":"634733979e23c5f0236bd3ef"}}

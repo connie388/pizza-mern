@@ -1,0 +1,5 @@
+{"_id":{"$oid":"634733979e23c5f0236bd3ef"},"category":"pizza"}
+{"_id":{"$oid":"634733a69e23c5f0236bd3f0"},"category":"pasta"}
+{"_id":{"$oid":"634751e69e23c5f0236bd40d"},"category":"sandwich"}
+{"_id":{"$oid":"63497f65df528bcc16905634"},"category":"side"}
+{"_id":{"$oid":"63497f76df528bcc16905635"},"category":"drink"}
