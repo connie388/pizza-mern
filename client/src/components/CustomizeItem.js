@@ -4,9 +4,6 @@ import Toppings from "./Toppings";
 import { Collapsible } from "../util/Collapsible";
 import { RadioButton } from "../util/RadioButton";
 import DisplayImageList from "./DisplayImageList";
-import { sauces } from "../data/sauces";
-// import { addons } from "../data/addons";
-import { cheese } from "../data/cheese";
 const axios = require("axios").default;
 
 function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {

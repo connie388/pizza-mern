@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { RadioButton } from "../util/RadioButton";
 
 function DisplayImageList({
   dataList,
