@@ -6,6 +6,7 @@ var menu_controller = require("../controller/menuController");
 var menu_choice_controller = require("../controller/menuChoiceController");
 var menu_choice_by_category_controller = require("../controller/menuChoiceByCategoryController");
 var sauce_controller = require("../controller/sauceTypeController");
+var sauce_amount_type_controller = require("../controller/sauceAmountTypeController");
 var cheese_controller = require("../controller/cheeseTypeController");
 var toppings_controller = require("../controller/toppingsController");
 
@@ -40,6 +41,11 @@ router.get("/order/sauce", sauce_controller.findAll);
 router.post("/order/sauce", sauce_controller.create);
 router.put("/order/sauce/:id", sauce_controller.update);
 router.delete("/order/sauce/:id", sauce_controller.delete);
+
+router.get("/order/sauce-amount", sauce_amount_type_controller.findAll);
+router.post("/order/sauce-amount", sauce_amount_type_controller.create);
+router.put("/order/sauce-amount/:id", sauce_amount_type_controller.update);
+router.delete("/order/sauce-amount/:id", sauce_amount_type_controller.delete);
 
 router.get("/order/cheese", cheese_controller.findAll);
 router.post("/order/cheese", cheese_controller.create);

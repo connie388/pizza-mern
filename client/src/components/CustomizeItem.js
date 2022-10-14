@@ -11,6 +11,10 @@ const axios = require("axios").default;
 
 function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
   const [toppings, setToppings] = useState();
+  const [cheeseType, setCheeseType] = useState();
+  const [sauceType, setSauceType] = useState();
+  const [amountType, setAmountType] = useState();
+
   const [selectedDough, setSelectedDough] = useState();
   const [selectedCrust, setSelectedCrust] = useState();
   const [selectedCook, setSelectedCook] = useState();
@@ -28,11 +32,46 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
     axios
       .get(`http://localhost:4000/pizza/v1.0.0/order/toppings`)
       .then(function (response) {
-        // handle success
-        // console.log(response.data.toppings);
-        // console.log("item =" + item);
         setToppings(response.data.toppings);
-        // console.log(JSON.stringify(menu));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+    axios
+      .get(`http://localhost:4000/pizza/v1.0.0/order/sauce`)
+      .then(function (response) {
+        // console.log("response=" + JSON.stringify(response.data.sauce));
+        setSauceType(response.data.sauce);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+    axios
+      .get(`http://localhost:4000/pizza/v1.0.0/order/sauce-amount`)
+      .then(function (response) {
+        // console.log("response=" + JSON.stringify(response.data.sauce));
+        setAmountType(response.data.sauce);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+    axios
+      .get(`http://localhost:4000/pizza/v1.0.0/order/cheese`)
+      .then(function (response) {
+        // console.log("response=" + JSON.stringify(response.data.cheese));
+        setCheeseType(response.data.cheese);
       })
       .catch(function (error) {
         // handle error
@@ -122,7 +161,7 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
         </div>
       </div>
       <div className="inline">
-        {currentData.type.map((record, idx) => {
+        {currentData.type?.map((record, idx) => {
           return (
             <div key={idx} className="detail-section">
               <div
@@ -234,11 +273,12 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
         chosenId="chosen-sauce"
       >
         <DisplayImageList
-          dataList={sauces.list}
+          dataList={sauceType}
           radioButtonGroupName="sauce-group"
           material="sauce"
           preOrder={preOrder}
           setPreOrder={setPreOrder}
+          amountTypeList={amountType}
         />
       </Collapsible>
       <Collapsible
@@ -249,11 +289,12 @@ function CustomizeItem({ order, setOrder, currentData, setCurrentData }) {
         chosenId="chosen-cheese"
       >
         <DisplayImageList
-          dataList={cheese.list}
+          dataList={cheeseType}
           radioButtonGroupName="cheese-group"
           material="cheese"
           preOrder={preOrder}
           setPreOrder={setPreOrder}
+          amountTypeList={amountType}
         />
       </Collapsible>
       <Collapsible

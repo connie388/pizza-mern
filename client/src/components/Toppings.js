@@ -18,7 +18,7 @@ function Toppings({ recordNo, checkedState, toppings, setCheckedState }) {
             >
               {addon.category.toUpperCase() + " TOPPINGS"}
             </label>
-            {addon.list.map((thisToping, j) => {
+            {addon.list?.map((thisToping, j) => {
               return (
                 <div className="inline" key={addon.category + j}>
                   <input

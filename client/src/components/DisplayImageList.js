@@ -7,8 +7,38 @@ function DisplayImageList({
   material,
   preOrder,
   setPreOrder,
+  amountTypeList,
 }) {
   const [selected, setSelected] = useState("");
+  const [selectedRecord, setSelectedRecord] = useState("");
+
+  function DisplayAmountList(data) {
+    function onChanged(e) {
+      setSelectedRecord(data.name + "|" + e.target.value);
+      setSelected(data.name);
+      let value = data.name + " (" + e.target.value + ")";
+      let previousPreOrder = preOrder;
+      setPreOrder({
+        ...previousPreOrder,
+        [material]: value,
+      });
+    }
+    return amountTypeList?.map((record, index) => {
+      return (
+        <label key={index} className="small-font weight-light">
+          <input
+            type="radio"
+            id={record.type}
+            name={radioButtonGroupName}
+            checked={selectedRecord === data.name + "|" + record.type}
+            value={record.type}
+            onChange={(e) => onChanged(e)}
+          />
+          {record.type}
+        </label>
+      );
+    });
+  }
 
   return (
     <div className="box">
@@ -23,6 +53,7 @@ function DisplayImageList({
             }
             onClick={(e) => {
               setSelected(data.name);
+              setSelectedRecord("");
               let previousPreOrder = preOrder;
               setPreOrder({ ...previousPreOrder, [material]: data.name });
             }}
@@ -36,36 +67,9 @@ function DisplayImageList({
               <div className="detail-section">
                 <div className="large-font font-weight-bold">{data.name}</div>
                 <div>
-                  {data.type ? (
+                  {data.amountType ? (
                     <div className="inline">
-                      {data.type.map((type, index) => {
-                        return (
-                          <p key={index} className="small-font weight-light">
-                            <RadioButton
-                              border="false"
-                              index={index}
-                              name={radioButtonGroupName}
-                              id={type}
-                              label={type}
-                              value={type}
-                              class="none"
-                              onChange={(e) => {
-                                setSelected(data.name);
-                                let value =
-                                  data.name +
-                                  " (" +
-                                  e.currentTarget.value +
-                                  ")";
-                                let previousPreOrder = preOrder;
-                                setPreOrder({
-                                  ...previousPreOrder,
-                                  [material]: value,
-                                });
-                              }}
-                            />
-                          </p>
-                        );
-                      })}
+                      <DisplayAmountList name={data.name} />
                     </div>
                   ) : (
                     <></>

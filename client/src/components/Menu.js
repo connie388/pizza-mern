@@ -214,7 +214,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
                 onSelectChange={onSelectChange}
                 classNm="dropdown"
               >
-                {data.type.map((record, idx) => {
+                {data.type?.map((record, idx) => {
                   return (
                     <option key={idx} value={record.amount}>
                       {record.size} {record.information}
@@ -233,7 +233,7 @@ function Menu({ item, setItem, order, setOrder, currentData, setCurrentData }) {
                 onSelectChange={onSelectChange}
                 classNm="dropdown"
               >
-                {data.choice.map((record, idx) => {
+                {data.choice?.map((record, idx) => {
                   return (
                     <option key={idx} value={record.amount}>
                       {record.size} {record.information}

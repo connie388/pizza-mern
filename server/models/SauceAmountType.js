@@ -3,9 +3,7 @@ const Schema = mongoose.Schema;
 
 var sauceAmountTypeSchema = new Schema(
   {
-    type: String,
-    unique: true,
-    required: true,
+    type: { type: String, unique: true, required: true },
   },
   { timestamps: true }
 );

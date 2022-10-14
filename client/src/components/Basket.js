@@ -44,7 +44,7 @@ function Basket({ order, setOrder, item, setItem, total, setTotal }) {
       ) : (
         <>
           <div className="content-section">
-            {order.map((record, index) => {
+            {order?.map((record, index) => {
               return (
                 <div key={index}>
                   <div className="inline">
@@ -63,11 +63,11 @@ function Basket({ order, setOrder, item, setItem, total, setTotal }) {
                       {parseFloat(record.amount).toFixed(2)}
                     </div>
                   </div>
-                  {record.toppings &&
-                    record.toppings.map((addOn) => {
+                  {
+                    record.toppings?.map((addOn) => {
                       return (
-                        addOn.list &&
-                        addOn.list.map((data, index) => {
+                        
+                        addOn.list?.map((data, index) => {
                           return (
                             <div key={index} className="inline">
                               <div className="regular-font font-weight-light middle">

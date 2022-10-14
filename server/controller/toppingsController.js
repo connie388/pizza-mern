@@ -89,9 +89,6 @@ exports.findAll = (req, res) => {
   //  Query category is join with comma
   const categoryStringList = req.query.category?.split(",");
 
-  // for _id, needs to convert to object
-  // const idObjectList = idStringList.map(ObjectId);
-
   var condition = categoryStringList
     ? { category: { $in: categoryStringList } }
     : {};
