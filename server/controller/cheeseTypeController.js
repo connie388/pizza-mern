@@ -47,6 +47,22 @@ exports.findAll = (req, res) => {
     );
 };
 
+exports.findById = (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const filter = { _id: Object(id) };
+  CheeseTypeModel.find(filter)
+    .lean()
+    .then((cheese) => res.status(200).json({ success: true, cheese }))
+    .catch((err) =>
+      res.status(400).json({
+        success: false,
+        message:
+          err.message ||
+          "Some error occurred while retrieving the Cheese Type record.",
+      })
+    );
+};
+
 // Update record by the id in the request
 exports.update = (req, res) => {
   if (!req.body) {

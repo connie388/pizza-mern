@@ -15,39 +15,42 @@ router.post("/order/menu", menu_controller.create);
 router.put("/order/menu/:id", menu_controller.update);
 router.delete("/order/menu/:id", menu_controller.delete);
 
-router.get("/order/menu-choice", menu_choice_controller.findAll);
-router.post("/order/menu-choice", menu_choice_controller.create);
-router.put("/order/menu-choice/:id", menu_choice_controller.update);
-router.delete("/order/menu-choice/:id", menu_choice_controller.delete);
+router.get("/order/menuchoice", menu_choice_controller.findAll);
+router.post("/order/menuchoice", menu_choice_controller.create);
+router.put("/order/menuchoice/:id", menu_choice_controller.update);
+router.delete("/order/menuchoice/:id", menu_choice_controller.delete);
 
 router.get(
-  "/order/menu-choice-by-category",
+  "/order/menuchoicebycategory",
   menu_choice_by_category_controller.findAll
 );
 router.post(
-  "/order/menu-choice-by-category",
+  "/order/menuchoicebycategory",
   menu_choice_by_category_controller.create
 );
 router.put(
-  "/order/menu-choice-by-category/:id",
+  "/order/menuchoicebycategory/:id",
   menu_choice_by_category_controller.update
 );
 router.delete(
-  "/order/menu-choice-by-category/:id",
+  "/order/menuchoicebycategory/:id",
   menu_choice_by_category_controller.delete
 );
 
 router.get("/order/sauce", sauce_controller.findAll);
+router.get("/order/sauce/:id", sauce_controller.findById);
 router.post("/order/sauce", sauce_controller.create);
 router.put("/order/sauce/:id", sauce_controller.update);
 router.delete("/order/sauce/:id", sauce_controller.delete);
 
-router.get("/order/sauce-amount", sauce_amount_type_controller.findAll);
-router.post("/order/sauce-amount", sauce_amount_type_controller.create);
-router.put("/order/sauce-amount/:id", sauce_amount_type_controller.update);
-router.delete("/order/sauce-amount/:id", sauce_amount_type_controller.delete);
+router.get("/order/sauceamount", sauce_amount_type_controller.findAll);
+router.get("/order/sauceamount/:id", sauce_amount_type_controller.findById);
+router.post("/order/sauceamount", sauce_amount_type_controller.create);
+router.put("/order/sauceamount/:id", sauce_amount_type_controller.update);
+router.delete("/order/sauceamount/:id", sauce_amount_type_controller.delete);
 
 router.get("/order/cheese", cheese_controller.findAll);
+router.get("/order/cheese/:id", cheese_controller.findById);
 router.post("/order/cheese", cheese_controller.create);
 router.put("/order/cheese/:id", cheese_controller.update);
 router.delete("/order/cheese/:id", cheese_controller.delete);

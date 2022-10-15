@@ -10,11 +10,15 @@ exports.create = (req, res) => {
     return;
   }
 
+  let img = req.body.image;
+  if (img === "") {
+    img = null;
+  }
   // Create a record
   const sauceType = new SauceTypeModel({
     name: req.body.name,
     desc: req.body.desc,
-    image: req.body.image,
+    image: img,
     amountType: req.body.amountType,
   });
 
@@ -25,6 +29,8 @@ exports.create = (req, res) => {
       res.status(200).json({ success: true, data });
     })
     .catch((err) => {
+      console.log("sauceType=" + JSON.stringify(sauceType));
+      console.log(JSON.stringify(err));
       res.status(500).json({
         success: false,
         message:
@@ -42,6 +48,22 @@ exports.findAll = (req, res) => {
         success: false,
         message:
           err.message || "Some error occurred while retrieving the Sauce Type.",
+      })
+    );
+};
+
+exports.findById = (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const filter = { _id: Object(id) };
+  SauceTypeModel.find(filter)
+    .lean()
+    .then((sauce) => res.status(200).json({ success: true, sauce }))
+    .catch((err) =>
+      res.status(400).json({
+        success: false,
+        message:
+          err.message ||
+          "Some error occurred while retrieving the Sauce Type record.",
       })
     );
 };

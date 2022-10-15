@@ -35,13 +35,29 @@ exports.create = (req, res) => {
 // Retrieve all from the database.
 exports.findAll = (req, res) => {
   SauceAmountTypeModel.find()
-    .then((sauce) => res.status(200).json({ success: true, sauce }))
+    .then((sauceamount) => res.status(200).json({ success: true, sauceamount }))
     .catch((err) =>
       res.status(400).json({
         success: false,
         message:
           err.message ||
           "Some error occurred while retrieving the Sauce Amount Type.",
+      })
+    );
+};
+
+exports.findById = (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const filter = { _id: Object(id) };
+  SauceAmountTypeModel.find(filter)
+    .lean()
+    .then((sauceamount) => res.status(200).json({ success: true, sauceamount }))
+    .catch((err) =>
+      res.status(400).json({
+        success: false,
+        message:
+          err.message ||
+          "Some error occurred while retrieving the Sauce Amount Type record.",
       })
     );
 };

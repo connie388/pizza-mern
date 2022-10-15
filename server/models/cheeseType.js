@@ -10,10 +10,13 @@ var cheeseTypeSchema = new Schema(
       required: false,
       validate: {
         validator: function (value) {
-          const urlPattern =
-            /(http|https):\/\/(\w+:{0,1}\w*#)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%#!\-/]))?/;
-          const urlRegExp = new RegExp(urlPattern);
-          return value.match(urlRegExp);
+          if (value.length > 0) {
+            const urlPattern =
+              /(http|https):\/\/(\w+:{0,1}\w*#)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%#!\-/]))?/;
+            const urlRegExp = new RegExp(urlPattern);
+            return value.match(urlRegExp);
+          }
+          return true;
         },
         message: (props) => `${props.value} is not a valid URL`,
       },
