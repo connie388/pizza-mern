@@ -160,7 +160,10 @@ const useForm = (initialJson, callback) => {
     event.persist();
 
     const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value =
+      target.getAttribute("type") === "checkbox"
+        ? target.checked
+        : target.value;
     const name = target.name;
     validate(event, name, value);
 
