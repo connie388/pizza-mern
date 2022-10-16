@@ -105,6 +105,22 @@ exports.findAll = (req, res) => {
     );
 };
 
+exports.findById = (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const filter = { _id: Object(id) };
+  ToppingsModel.find(filter)
+    .lean()
+    .then((toppings) => res.status(200).json({ success: true, toppings }))
+    .catch((err) =>
+      res.status(400).json({
+        success: false,
+        message:
+          err.message ||
+          "Some error occurred while retrieving the Toppings record.",
+      })
+    );
+};
+
 // Update Toppings table  by the id in the request
 // http://localhost:4000/pizza/v1.0.0/order/toppings/"634727bf994f8ef9d7e8306a"
 exports.update = (req, res) => {

@@ -44,7 +44,13 @@ function Navbar() {
         >
           Sauce Amount Type
         </a>
-
+        <a
+          href="#"
+          className={item === "menucategory" ? "active" : "navitem"}
+          onClick={() => changeActiveItem("menucategory")}
+        >
+          Menu Category
+        </a>
         <div className="topnav-right">
           <NavLink
             className={action === "create" ? "blue" : "non-active"}

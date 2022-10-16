@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { documents } from "../data/documents";
 import { useContext } from "react";
@@ -9,15 +9,23 @@ const Record = (props) => (
   <tbody>
     <tr>
       {documents[props.item]?.map((data, index) => {
-        return <td key={index}>{props.record[data.name]}</td>;
+        return typeof props.record[data.name] === "boolean" ? (
+          <td key={index}>
+            {props.record[data.name] === true ? (
+              <input type="checkbox" defaultChecked />
+            ) : (
+              <input type="checkbox" />
+            )}
+          </td>
+        ) : (
+          <td key={index}>{props.record[data.name]}</td>
+        );
       })}
       <td>
-        <NavLink className="btn btn-link" to={`/edit/${props.record._id}`}>
+        <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
           Edit
-        </NavLink>
-      </td>
-      <td>|</td>
-      <td>
+        </Link>
+        |
         <button
           className="btn btn-link"
           onClick={() => {

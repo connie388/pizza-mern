@@ -6,6 +6,7 @@ import { TextField } from "../util/TextField";
 import { documents } from "../data/documents";
 import { useContext } from "react";
 import { DataContext } from "../util/DataProvider";
+import "../styles/app.css";
 
 export default function Create() {
   const { handleChange, inputs, setInputs, errors } = useForm({});
@@ -76,11 +77,7 @@ export default function Create() {
         })}
 
         <div className="form-group">
-          <input
-            type="submit"
-            value="Create record"
-            className="btn btn-primary"
-          />
+          <input type="submit" value="Add" className="btn btn-primary" />
         </div>
       </form>
     </div>

@@ -4,7 +4,7 @@ export const documents = {
       name: "name",
       label: "Name",
       type: "text",
-      required: "required",
+      required: true,
     },
     {
       name: "desc",
@@ -22,7 +22,7 @@ export const documents = {
       name: "name",
       label: "Name",
       type: "text",
-      required: "required",
+      required: true,
     },
     {
       name: "desc",
@@ -45,7 +45,15 @@ export const documents = {
       name: "type",
       label: "Type",
       type: "text",
-      required: "required",
+      required: true,
+    },
+  ],
+  menucategory: [
+    {
+      name: "category",
+      label: "Category",
+      type: "text",
+      required: true,
     },
   ],
 };

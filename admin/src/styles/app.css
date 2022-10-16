@@ -10,3 +10,21 @@ html,
 body {
   height: 100%;
 }
+
+input[type="text"],
+input[type="checkbox"] {
+  width: 80%;
+  margin: 20px;
+  padding: 12px;
+  border-radius: 3px;
+}
+
+input:invalid {
+  background-color: #ffdddd;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}

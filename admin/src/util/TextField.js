@@ -26,6 +26,7 @@ export const TextField = ({
           onChange={onChange}
           pattern={pattern}
           inputMode={inputMode}
+          checked={value === true ? "checked" : ""}
           required
         />
       ) : (
@@ -38,6 +39,7 @@ export const TextField = ({
           onChange={onChange}
           pattern={pattern}
           inputMode={inputMode}
+          checked={value === true? "checked":""}
         />
       )}
     </div>

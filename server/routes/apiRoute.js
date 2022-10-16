@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 // Require controller modules.
+var menu_category_controller = require("../controller/menuCategoryController");
 var menu_controller = require("../controller/menuController");
 var menu_choice_controller = require("../controller/menuChoiceController");
 var menu_choice_by_category_controller = require("../controller/menuChoiceByCategoryController");
@@ -9,6 +10,12 @@ var sauce_controller = require("../controller/sauceTypeController");
 var sauce_amount_type_controller = require("../controller/sauceAmountTypeController");
 var cheese_controller = require("../controller/cheeseTypeController");
 var toppings_controller = require("../controller/toppingsController");
+
+router.get("/order/menucategory", menu_category_controller.findAll);
+router.get("/order/menucategory/:id", menu_category_controller.findById);
+router.post("/order/menucategory", menu_category_controller.create);
+router.put("/order/menucategory/:id", menu_category_controller.update);
+router.delete("/order/menucategory/:id", menu_category_controller.delete);
 
 router.get("/order/menu", menu_controller.findAll);
 router.post("/order/menu", menu_controller.create);
