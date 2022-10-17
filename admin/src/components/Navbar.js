@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../util/DataProvider";
 
@@ -23,46 +23,54 @@ function Navbar() {
   return (
     <div className="topnav" id="myTopnav">
       <nav>
-        <a
-          href="#"
-          className={item === "cheese" ? "active" : "navitem"}
+        <Link
+          to="/"
           onClick={() => changeActiveItem("cheese")}
+          className={item === "cheese" ? "active" : "navitem"}
         >
           Cheese Type
-        </a>
-        <a
-          href="#"
-          className={item === "sauce" ? "active" : "navitem"}
+        </Link>
+        <Link
+          to="/"
           onClick={() => changeActiveItem("sauce")}
+          className={item === "sauce" ? "active" : "navitem"}
         >
           Sauce Type
-        </a>
-        <a
-          href="#"
-          className={item === "sauceamount" ? "active" : "navitem"}
+        </Link>
+        <Link
+          to="/"
           onClick={() => changeActiveItem("sauceamount")}
+          className={item === "sauceamount" ? "active" : "navitem"}
         >
           Sauce Amount Type
-        </a>
-        <a
-          href="#"
-          className={item === "menucategory" ? "active" : "navitem"}
+        </Link>
+        <Link
+          to="/"
           onClick={() => changeActiveItem("menucategory")}
+          className={item === "menucategory" ? "active" : "navitem"}
         >
           Menu Category
-        </a>
+        </Link>
+        <Link
+          to="/toppings"
+          onClick={() => changeActiveItem("toppings")}
+          className={item === "toppings" ? "active" : "navitem"}
+        >
+          Toppings
+        </Link>
+
         <div className="topnav-right">
           <NavLink
             className={action === "create" ? "blue" : "non-active"}
             onClick={() => setAction("create")}
-            to="/create"
+            to={item === "toppings" ? "/create/toppings" : "/create"}
           >
             Create Record
           </NavLink>
           <NavLink
             className={action === "list" ? "blue" : "non-active"}
             onClick={() => setAction("list")}
-            to="/"
+            to={item === "toppings" ? "/toppings" : "/"}
           >
             Record List
           </NavLink>

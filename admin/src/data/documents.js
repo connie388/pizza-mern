@@ -56,4 +56,31 @@ export const documents = {
       required: true,
     },
   ],
+  toppings: [
+    {
+      name: "category",
+      label: "Category",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "price",
+      label: "Price",
+      type: "Float",
+      required: true,
+    },
+    {
+      name: "list",
+      label: "list",
+      type: "array",
+      list: [
+        {
+          name: "topping",
+          label: "Topping",
+          type: "Float",
+          required: true,
+        },
+      ],
+    },
+  ],
 };

@@ -63,6 +63,7 @@ router.put("/order/cheese/:id", cheese_controller.update);
 router.delete("/order/cheese/:id", cheese_controller.delete);
 
 router.get("/order/toppings", toppings_controller.findAll);
+router.get("/order/toppings/:id", toppings_controller.findById);
 router.post("/order/toppings", toppings_controller.create);
 router.put("/order/toppings/:id", toppings_controller.update);
 router.delete("/order/toppings/:id", toppings_controller.delete);
