@@ -166,4 +166,55 @@ export const documents = {
       type: "text",
     },
   ],
+  menu: [
+    {
+      name: "category",
+      label: "Category",
+      type: "array",
+      list: [
+        {
+          name: "category",
+          label: "Category",
+          type: "text",
+          required: true,
+        },
+      ],
+    },
+    {
+      name: "name",
+      label: "Name",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "customize",
+      label: "Customize",
+      type: "checkbox",
+    },
+    {
+      name: "new",
+      label: "New",
+      type: "checkbox",
+    },
+    {
+      name: "calory",
+      label: "Calory",
+      type: "text",
+    },
+    {
+      name: "amount",
+      label: "Amount",
+      type: "number",
+    },
+    {
+      name: "image",
+      label: "Image",
+      type: "text",
+    },
+    {
+      name: "description",
+      label: "Description",
+      type: "text",
+    },
+  ],
 };

@@ -35,8 +35,8 @@ export default function Create() {
       setInputs((values) => ({ ...values, [data.name]: "" }));
     });
 
-    // setAction("list");
-    // navigate("/");
+    setAction("list");
+    navigate("/");
   }
 
   // This following section will display the form that takes the input from the user.

@@ -108,12 +108,29 @@ exports.findAll = async (req, res) => {
   MenuModel.find(condition)
     .populate("type", "shape size amount information")
     .populate("choice", "size amount information")
+    .populate("category")
     .then((menu) => res.status(200).json({ success: true, menu }))
     .catch((error) =>
       res.status(500).json({
         success: false,
         message:
           error.message || "Some error occurred while retrieving the menu.",
+      })
+    );
+};
+
+exports.findById = (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const filter = { _id: Object(id) };
+  MenuModel.find(filter)
+    .populate("category")
+    .then((menu) => res.status(200).json({ success: true, menu }))
+    .catch((err) =>
+      res.status(400).json({
+        success: false,
+        message:
+          err.message ||
+          "Some error occurred while retrieving the Menu Choice record.",
       })
     );
 };

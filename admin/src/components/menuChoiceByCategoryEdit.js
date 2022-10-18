@@ -29,8 +29,8 @@ export default function MenuChoiceByCategoryEdit() {
       const record = response.data[item][0];
       if (!record) {
         window.alert(`Record with id ${id} not found`);
-        // setAction("list");
-        navigate("/");
+        setAction("list");
+        navigate("/menuchoicebycategory");
         return;
       }
 
@@ -61,7 +61,7 @@ export default function MenuChoiceByCategoryEdit() {
       window.alert(err.message || "An error has occurred.");
       return;
     }
-    // setAction("list");
+    setAction("list");
     navigate("/menuchoicebycategory");
   }
 

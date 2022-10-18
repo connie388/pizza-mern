@@ -30,7 +30,7 @@ export default function Edit() {
       const record = response.data[item][0];
       if (!record) {
         window.alert(`Record with id ${id} not found`);
-        // setAction("list");
+        setAction("list");
         navigate("/");
         return;
       }
@@ -62,7 +62,7 @@ export default function Edit() {
       window.alert(err.message || "An error has occurred.");
       return;
     }
-    // setAction("list");
+    setAction("list");
     navigate("/");
   }
 

@@ -7,14 +7,17 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import RecordList from "./components/recordList";
 import ToppingsRecordList from "./components/toppingsRecordList";
+import MenuRecordList from "./components/menuRecordList";
 import MenuChoiceRecordList from "./components/menuChoiceRecordList";
 import MenuChoiceByCategoryRecordList from "./components/menuChoiceByCategoryRecordList";
 import Edit from "./components/edit";
 import ToppingsEdit from "./components/toppingsEdit";
+import MenuEdit from "./components/menuEdit";
 import MenuChoiceEdit from "./components/menuChoiceEdit";
 import MenuChoiceByCategoryEdit from "./components/menuChoiceByCategoryEdit";
 import Create from "./components/create";
 import ToppingsCreate from "./components/toppingsCreate";
+import MenuCreate from "./components/menuCreate";
 import MenuChoiceCreate from "./components/menuChoiceCreate";
 import MenuChoiceByCategoryCreate from "./components/menuChoiceByCategoryCreate";
 import { DataProvider } from "./util/DataProvider";
@@ -45,6 +48,9 @@ const App = () => {
         <Route path="/menuchoice" element={<MenuChoiceRecordList />} />
         <Route path="/edit/menuchoice/:id" element={<MenuChoiceEdit />} />
         <Route path="/create/menuchoice" element={<MenuChoiceCreate />} />
+        <Route path="/menu" element={<MenuRecordList />} />
+        <Route path="/edit/menu/:id" element={<MenuEdit />} />
+        <Route path="/create/menu" element={<MenuCreate />} />
       </Routes>
     </DataProvider>
   );

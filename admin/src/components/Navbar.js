@@ -13,9 +13,12 @@ function Navbar() {
     if (
       itemName === "toppings" ||
       itemName === "menuchoicebycategory" ||
-      itemName === "menuchoice"
+      itemName === "menuchoice" ||
+      itemName === "menu"
     ) {
       setLoc(`/${itemName}`);
+    } else {
+      setLoc("/");
     }
   };
 
@@ -33,59 +36,93 @@ function Navbar() {
       <nav>
         <Link
           to="/"
-          onClick={() => changeActiveItem("cheese")}
+          onClick={() => {
+            changeActiveItem("cheese");
+            setAction("list");
+          }}
           className={item === "cheese" ? "active" : "navitem"}
         >
           Cheese Type
         </Link>
         <Link
           to="/"
-          onClick={() => changeActiveItem("sauce")}
+          onClick={() => {
+            changeActiveItem("sauce");
+            setAction("list");
+          }}
           className={item === "sauce" ? "active" : "navitem"}
         >
           Sauce Type
         </Link>
         <Link
           to="/"
-          onClick={() => changeActiveItem("sauceamount")}
+          onClick={() => {
+            changeActiveItem("sauceamount");
+            setAction("list");
+          }}
           className={item === "sauceamount" ? "active" : "navitem"}
         >
           Sauce Amount Type
         </Link>
         <Link
           to="/"
-          onClick={() => changeActiveItem("menucategory")}
+          onClick={() => {
+            changeActiveItem("menucategory");
+            setAction("list");
+          }}
           className={item === "menucategory" ? "active" : "navitem"}
         >
           Menu Category
         </Link>
         <Link
           to="/"
-          onClick={() => changeActiveItem("toppingcategory")}
+          onClick={() => {
+            changeActiveItem("toppingcategory");
+            setAction("list");
+          }}
           className={item === "toppingcategory" ? "active" : "navitem"}
         >
           Topping Category
         </Link>
         <Link
           to="/toppings"
-          onClick={() => changeActiveItem("toppings")}
+          onClick={() => {
+            changeActiveItem("toppings");
+            setAction("list");
+          }}
           className={item === "toppings" ? "active" : "navitem"}
         >
           Toppings
         </Link>
         <Link
           to="/menuchoicebycategory"
-          onClick={() => changeActiveItem("menuchoicebycategory")}
+          onClick={() => {
+            changeActiveItem("menuchoicebycategory");
+            setAction("list");
+          }}
           className={item === "menuchoicebycategory" ? "active" : "navitem"}
         >
           Menu Choice by Category
         </Link>
         <Link
           to="/menuchoice"
-          onClick={() => changeActiveItem("menuchoice")}
+          onClick={() => {
+            changeActiveItem("menuchoice");
+            setAction("list");
+          }}
           className={item === "menuchoice" ? "active" : "navitem"}
         >
           Menu Choice
+        </Link>
+        <Link
+          to="/menu"
+          onClick={() => {
+            changeActiveItem("menu");
+            setAction("list");
+          }}
+          className={item === "menu" ? "active" : "navitem"}
+        >
+          Menu
         </Link>
         <div className="topnav-right">
           <NavLink

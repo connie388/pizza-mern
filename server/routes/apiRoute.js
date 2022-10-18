@@ -19,6 +19,7 @@ router.put("/order/menucategory/:id", menu_category_controller.update);
 router.delete("/order/menucategory/:id", menu_category_controller.delete);
 
 router.get("/order/menu", menu_controller.findAll);
+router.get("/order/menu/:id", menu_controller.findById);
 router.post("/order/menu", menu_controller.create);
 router.put("/order/menu/:id", menu_controller.update);
 router.delete("/order/menu/:id", menu_controller.delete);

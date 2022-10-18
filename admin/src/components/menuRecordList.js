@@ -5,7 +5,7 @@ import { documents } from "../data/documents";
 import { useContext } from "react";
 import { DataContext } from "../util/DataProvider";
 
-const MenuChoiceByCategoryRecord = (props) => (
+const MenuRecord = (props) => (
   <tbody>
     <tr>
       {documents[props.item]?.map((data, index) => {
@@ -19,44 +19,31 @@ const MenuChoiceByCategoryRecord = (props) => (
           </td>
         ) : data.type === "array" ? (
           <td key={`category_${index + 1}`}>
-            {props.record[data.name]?.map((d, i) => {
-              return (
-                <div className="inline" key={`detail_${i + 1}`}>
-                  <div>{d.size.padEnd(15, " ")}</div>
-                  <div>{d.amount.toString().trim().padStart(20, " ")}</div>
-                  <div>{d.information}</div>
-                  <div>{d.shape.padEnd(15, " ")}</div>
-                  <div>
-                    <Link
-                      className="btn btn-link"
-                      to={`/edit/menuchoicebycategory/${d._id}`}
-                    >
-                      Edit
-                    </Link>
-                    |
-                    <button
-                      className="btn btn-link"
-                      onClick={() => {
-                        console.log("d._id=" + d._id);
-                        props.deleteRecord(props.categoryId, d._id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+            <div>{props.record[data?.name]["category"]}</div>
           </td>
         ) : (
-          <td key={`category_${index + 1}`}>{props.record[data.name]}</td>
+          <td key={`category_${index + 1}`}>{props.record[data?.name]}</td>
         );
       })}
+      <td>
+        <Link className="btn btn-link" to={`/edit/menu/${props.record._id}`}>
+          Edit
+        </Link>
+        |
+        <button
+          className="btn btn-link"
+          onClick={() => {
+            props.deleteRecord(props.record._id);
+          }}
+        >
+          Delete
+        </button>
+      </td>
     </tr>
   </tbody>
 );
 
-export default function MenuChoiceByCategoryRecordList() {
+export default function MenuRecordList() {
   const [item, setItem, action, setAction] = useContext(DataContext);
   const [records, setRecords] = useState([]);
 
@@ -77,32 +64,24 @@ export default function MenuChoiceByCategoryRecordList() {
     }
 
     getRecords();
-
-    return;
+    console.log("records=" + JSON.stringify(records));
   }, [item]);
 
   // This method will delete a record
-  async function deleteRecord(categoryId, id) {
+  async function deleteRecord(id) {
     await axios.delete(
       `http://localhost:4000/pizza/v1.0.0/order/${item}/"${id}"`
     );
 
-    const copy = structuredClone(records);
-
-    for (const record of copy) {
-      if (record._id === categoryId) {
-        record.list = record.list.filter((el) => el._id !== id);
-      }
-    }
-
-    setRecords(copy);
+    const newRecords = records.filter((el) => el._id !== id);
+    setRecords(newRecords);
   }
 
   // This method will map out the records on the table
   function recordList() {
     return records?.map((record) => {
       return (
-        <MenuChoiceByCategoryRecord
+        <MenuRecord
           item={item}
           record={record}
           categoryId={record._id}
@@ -116,7 +95,7 @@ export default function MenuChoiceByCategoryRecordList() {
   // This following section will display the table with the records of individuals.
   return (
     <div>
-      <h3>Menu Choice By Category Record List</h3>
+      <h3>Menu Record List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>

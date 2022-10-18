@@ -29,8 +29,8 @@ export default function ToppingsEdit() {
       const record = response.data[item][0];
       if (!record) {
         window.alert(`Record with id ${id} not found`);
-        // setAction("list");
-        navigate("/");
+        setAction("list");
+        navigate("/toppings");
         return;
       }
 
