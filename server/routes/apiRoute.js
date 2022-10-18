@@ -10,6 +10,7 @@ var sauce_controller = require("../controller/sauceTypeController");
 var sauce_amount_type_controller = require("../controller/sauceAmountTypeController");
 var cheese_controller = require("../controller/cheeseTypeController");
 var toppings_controller = require("../controller/toppingsController");
+var topping_category_controller = require("../controller/toppingCategoryController");
 
 router.get("/order/menucategory", menu_category_controller.findAll);
 router.get("/order/menucategory/:id", menu_category_controller.findById);
@@ -23,6 +24,7 @@ router.put("/order/menu/:id", menu_controller.update);
 router.delete("/order/menu/:id", menu_controller.delete);
 
 router.get("/order/menuchoice", menu_choice_controller.findAll);
+router.get("/order/menuchoice/:id", menu_choice_controller.findById);
 router.post("/order/menuchoice", menu_choice_controller.create);
 router.put("/order/menuchoice/:id", menu_choice_controller.update);
 router.delete("/order/menuchoice/:id", menu_choice_controller.delete);
@@ -30,6 +32,10 @@ router.delete("/order/menuchoice/:id", menu_choice_controller.delete);
 router.get(
   "/order/menuchoicebycategory",
   menu_choice_by_category_controller.findAll
+);
+router.get(
+  "/order/menuchoicebycategory/:id",
+  menu_choice_by_category_controller.findById
 );
 router.post(
   "/order/menuchoicebycategory",
@@ -67,5 +73,11 @@ router.get("/order/toppings/:id", toppings_controller.findById);
 router.post("/order/toppings", toppings_controller.create);
 router.put("/order/toppings/:id", toppings_controller.update);
 router.delete("/order/toppings/:id", toppings_controller.delete);
+
+router.get("/order/toppingcategory", topping_category_controller.findAll);
+router.get("/order/toppingcategory/:id", topping_category_controller.findById);
+router.post("/order/toppingcategory", topping_category_controller.create);
+router.put("/order/toppingcategory/:id", topping_category_controller.update);
+router.delete("/order/toppingcategory/:id", topping_category_controller.delete);
 
 module.exports = router;

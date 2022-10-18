@@ -10,7 +10,7 @@ import "../styles/app.css";
 
 export default function Create() {
   const { handleChange, inputs, setInputs, errors } = useForm({});
-  const [item, setAction] = useContext(DataContext);
+  const [item, setItem, action, setAction] = useContext(DataContext);
 
   const navigate = useNavigate();
 

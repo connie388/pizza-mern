@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/navbar.css";
 import { NavLink, Link } from "react-router-dom";
 import { useContext } from "react";
@@ -6,9 +6,17 @@ import { DataContext } from "../util/DataProvider";
 
 function Navbar() {
   const [item, setItem, action, setAction] = useContext(DataContext);
+  const [loc, setLoc] = useState("/");
 
   const changeActiveItem = (itemName) => {
     setItem(itemName);
+    if (
+      itemName === "toppings" ||
+      itemName === "menuchoicebycategory" ||
+      itemName === "menuchoice"
+    ) {
+      setLoc(`/${itemName}`);
+    }
   };
 
   function toggleIcon() {
@@ -52,25 +60,45 @@ function Navbar() {
           Menu Category
         </Link>
         <Link
+          to="/"
+          onClick={() => changeActiveItem("toppingcategory")}
+          className={item === "toppingcategory" ? "active" : "navitem"}
+        >
+          Topping Category
+        </Link>
+        <Link
           to="/toppings"
           onClick={() => changeActiveItem("toppings")}
           className={item === "toppings" ? "active" : "navitem"}
         >
           Toppings
         </Link>
-
+        <Link
+          to="/menuchoicebycategory"
+          onClick={() => changeActiveItem("menuchoicebycategory")}
+          className={item === "menuchoicebycategory" ? "active" : "navitem"}
+        >
+          Menu Choice by Category
+        </Link>
+        <Link
+          to="/menuchoice"
+          onClick={() => changeActiveItem("menuchoice")}
+          className={item === "menuchoice" ? "active" : "navitem"}
+        >
+          Menu Choice
+        </Link>
         <div className="topnav-right">
           <NavLink
             className={action === "create" ? "blue" : "non-active"}
             onClick={() => setAction("create")}
-            to={item === "toppings" ? "/create/toppings" : "/create"}
+            to={`/create${loc}`}
           >
             Create Record
           </NavLink>
           <NavLink
             className={action === "list" ? "blue" : "non-active"}
             onClick={() => setAction("list")}
-            to={item === "toppings" ? "/toppings" : "/"}
+            to={`${loc}`}
           >
             Record List
           </NavLink>

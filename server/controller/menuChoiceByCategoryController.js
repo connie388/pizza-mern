@@ -1,4 +1,5 @@
 const MenuChoiceByCategoryModel = require("../models/MenuChoiceByCategory");
+const MenuCategoryModel = require("../models/MenuCategory");
 const { ObjectId } = require("mongodb");
 
 exports.create = (req, res) => {
@@ -10,9 +11,11 @@ exports.create = (req, res) => {
     return;
   }
 
+  console.log("test");
+
   // Create a record
   const menuChoiceByCategory = new MenuChoiceByCategoryModel({
-    category: req.body.id,
+    category: req.body.category,
     shape: req.body.shape,
     size: req.body.size,
     amount: req.body.amount,
@@ -36,14 +39,34 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  MenuChoiceByCategoryModel.find()
-    .then((choice) => res.status(200).json({ success: true, choice }))
-    .catch((error) =>
-      res.status(500).json({
+  MenuCategoryModel.find()
+    .populate({ path: "list" })
+    .then((menuchoicebycategory) =>
+      res.status(200).json({ success: true, menuchoicebycategory })
+    )
+    .catch((err) =>
+      res.status(400).json({
         success: false,
         message:
-          error.message ||
-          "Some error occurred while retrieving the menu choice by category.",
+          err.message || "Some error occurred while retrieving the Toppings.",
+      })
+    );
+};
+
+exports.findById = (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const filter = { _id: Object(id) };
+  MenuChoiceByCategoryModel.find(filter)
+    .lean()
+    .then((menuchoicebycategory) =>
+      res.status(200).json({ success: true, menuchoicebycategory })
+    )
+    .catch((err) =>
+      res.status(400).json({
+        success: false,
+        message:
+          err.message ||
+          "Some error occurred while retrieving the Menu Choice By Category record.",
       })
     );
 };

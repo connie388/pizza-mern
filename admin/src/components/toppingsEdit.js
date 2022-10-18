@@ -3,13 +3,12 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import useForm from "../util/useForm";
 import { TextField } from "../util/TextField";
-import { documents } from "../data/documents";
 import { useContext } from "react";
 import { DataContext } from "../util/DataProvider";
 
 export default function ToppingsEdit() {
   const { handleChange, inputs, setInputs, errors } = useForm({});
-  const [item, setAction] = useContext(DataContext);
+  const [item, setItem, action, setAction] = useContext(DataContext);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -57,7 +56,7 @@ export default function ToppingsEdit() {
       window.alert(err.message || "An error has occurred.");
       return;
     }
-    // setAction("list");
+    setAction("list");
     navigate("/toppings");
   }
 

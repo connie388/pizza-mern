@@ -23,19 +23,23 @@ const ToppingsRecord = (props) => (
               return (
                 <div className="inline" key={`detail_${i + 1}`}>
                   <div>{d.topping}</div>
-                  <Link className="btn btn-link" to={`/edit/toppings/${d._id}`}>
-                    Edit
-                  </Link>
-                  |
-                  <button
-                    className="btn btn-link"
-                    onClick={() => {
-                      console.log("d._id=" + d._id);
-                      props.deleteRecord(props.categoryId, d._id);
-                    }}
-                  >
-                    Delete
-                  </button>
+                  <div>
+                    <Link
+                      className="btn btn-link"
+                      to={`/edit/toppings/${d._id}`}
+                    >
+                      Edit
+                    </Link>
+                    |
+                    <button
+                      className="btn btn-link"
+                      onClick={() => {
+                        props.deleteRecord(props.categoryId, d._id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -49,7 +53,7 @@ const ToppingsRecord = (props) => (
 );
 
 export default function ToppingsRecordList() {
-  const [item] = useContext(DataContext);
+  const [item, setItem, action, setAction] = useContext(DataContext);
   const [records, setRecords] = useState([]);
 
   // This method fetches the records from the database.

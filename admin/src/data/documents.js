@@ -56,6 +56,20 @@ export const documents = {
       required: true,
     },
   ],
+  toppingcategory: [
+    {
+      name: "category",
+      label: "Category",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "price",
+      label: "Price",
+      type: "Float",
+      required: true,
+    },
+  ],
   toppings: [
     {
       name: "category",
@@ -77,10 +91,79 @@ export const documents = {
         {
           name: "topping",
           label: "Topping",
-          type: "Float",
+          type: "number",
           required: true,
         },
       ],
+    },
+  ],
+  menuchoicebycategory: [
+    {
+      name: "category",
+      label: "Category",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "list",
+      label: "list",
+      type: "array",
+      list: [
+        {
+          name: "size",
+          label: "Size",
+          type: "text",
+          required: true,
+        },
+        {
+          name: "amount",
+          label: "Amount",
+          type: "number",
+          required: true,
+        },
+        {
+          name: "information",
+          label: "Information",
+          type: "text",
+        },
+        {
+          name: "shape",
+          label: "Shape",
+          type: "text",
+        },
+      ],
+    },
+  ],
+  menuchoice: [
+    {
+      name: "menu",
+      label: "Menu",
+      type: "array",
+      list: [
+        {
+          name: "name",
+          label: "Name",
+          type: "text",
+          required: true,
+        },
+      ],
+    },
+    {
+      name: "size",
+      label: "Size",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "amount",
+      label: "Amount",
+      type: "number",
+      required: true,
+    },
+    {
+      name: "information",
+      label: "Information",
+      type: "text",
     },
   ],
 };

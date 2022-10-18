@@ -155,7 +155,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = JSON.parse(req.params.id);
   const filter = { _id: ObjectId(id) };
-  console.log("id=" + id);
+
   ToppingsModel.findByIdAndDelete(filter)
     .then((data) => {
       if (!data) {

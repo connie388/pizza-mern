@@ -1,10 +1,9 @@
-const MenuChoiceModel = require("../models/MenuChoice");
-const MenuModel = require("../models/Menu");
+const ToppingCategoryModel = require("../models/ToppingCategory");
 const { ObjectId } = require("mongodb");
 
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body) {
+  if (!req.body.category || !req.body.price) {
     res
       .status(400)
       .send({ success: false, message: "Content can not be empty!" });
@@ -12,39 +11,38 @@ exports.create = (req, res) => {
   }
 
   // Create a record
-  const menuChoice = new MenuChoiceModel({
-    menu: req.body.menu, // Menu._id
-    size: req.body.size,
-    amount: req.body.amount,
-    information: req.body.information,
+  const toppingCategory = new ToppingCategoryModel({
+    category: req.body.category,
+    price: req.body.price,
   });
 
   // Save record in the database
-  menuChoice
-    .save(menuChoice)
-    .then((menuchoice) => {
-      res.status(200).json({ success: true, menuchoice });
+  toppingCategory
+    .save(toppingCategory)
+    .then((data) => {
+      res.status(200).json({ success: true, data });
     })
     .catch((err) => {
       res.status(500).json({
         success: false,
         message:
           err.message ||
-          "Some error occurred while creating the menu choice record.",
+          "Some error occurred while creating the Topping Category.",
       });
     });
 };
 
 exports.findAll = (req, res) => {
-  MenuChoiceModel.find()
-    .populate("menu")
-    .then((menuchoice) => res.status(200).json({ success: true, menuchoice }))
-    .catch((error) =>
-      res.status(500).json({
+  ToppingCategoryModel.find()
+    .then((toppingcategory) =>
+      res.status(200).json({ success: true, toppingcategory })
+    )
+    .catch((err) =>
+      res.status(400).json({
         success: false,
         message:
-          error.message ||
-          "Some error occurred while retrieving the menu choice.",
+          err.message ||
+          "Some error occurred while retrieving the Toppings Category.",
       })
     );
 };
@@ -52,20 +50,22 @@ exports.findAll = (req, res) => {
 exports.findById = (req, res) => {
   const id = JSON.parse(req.params.id);
   const filter = { _id: Object(id) };
-  MenuChoiceModel.find(filter)
-    .populate("menu")
-    .then((menuchoice) => res.status(200).json({ success: true, menuchoice }))
+  ToppingCategoryModel.find(filter)
+    .lean()
+    .then((toppingcategory) =>
+      res.status(200).json({ success: true, toppingcategory })
+    )
     .catch((err) =>
       res.status(400).json({
         success: false,
         message:
           err.message ||
-          "Some error occurred while retrieving the Menu Choice record.",
+          "Some error occurred while retrieving the Toppings Category record.",
       })
     );
 };
 
-// Update record by the id in the request
+// Update Toppings Category table  by the id in the request
 exports.update = (req, res) => {
   if (!req.body) {
     return res
@@ -76,20 +76,20 @@ exports.update = (req, res) => {
   const id = JSON.parse(req.params.id);
   const filter = { _id: ObjectId(id) };
 
-  MenuChoiceModel.findByIdAndUpdate(filter, req.body)
+  ToppingCategoryModel.findByIdAndUpdate(filter, req.body)
     .then((data) => {
       if (!data) {
         res.status(404).json({ success: false, message: `Record not found!` });
       } else
         res.status(200).json({
           success: true,
-          message: "The menu choice record was updated successfully.",
+          message: "Topping Category was updated successfully.",
         });
     })
     .catch((err) => {
       res.status(500).json({
         success: false,
-        error: err.message || `Error updating this record`,
+        message: err.message || "Error updating the record",
       });
     });
 };
@@ -97,13 +97,14 @@ exports.update = (req, res) => {
 // Delete a record with the specified id in the request
 exports.delete = (req, res) => {
   const id = JSON.parse(req.params.id);
+  const filter = { _id: ObjectId(id) };
 
-  MenuChoiceModel.findByIdAndDelete({ _id: ObjectId(id) })
+  ToppingCategoryModel.findByIdAndDelete(filter)
     .then((data) => {
       if (!data) {
         res.status(404).json({ success: false, message: `Record not found!` });
       } else {
-        res.status(200).json({
+        res.json({
           success: true,
           message: "This record was deleted successfully!",
         });
@@ -112,7 +113,7 @@ exports.delete = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         success: false,
-        message: err.message || `Could not delete this record`,
+        message: err.message || `Could not delete this record.`,
       });
     });
 };

@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import useForm from "../util/useForm";
 import { TextField } from "../util/TextField";
-import { documents } from "../data/documents";
 import { useContext } from "react";
 import { DataContext } from "../util/DataProvider";
 
-export default function Edit() {
+export default function MenuChoiceEdit() {
   const { handleChange, inputs, setInputs, errors } = useForm({});
   const [item, setItem, action, setAction] = useContext(DataContext);
   const params = useParams();
   const navigate = useNavigate();
+  const [menuName, setMenuName] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -30,16 +30,17 @@ export default function Edit() {
       const record = response.data[item][0];
       if (!record) {
         window.alert(`Record with id ${id} not found`);
-        // setAction("list");
-        navigate("/");
+        setAction("list");
+        navigate("/menuchoice");
         return;
       }
 
-      documents[item]?.map((data, index) => {
-        return setInputs((values) => ({
-          ...values,
-          [data.name]: record[data.name],
-        }));
+      setMenuName(record["menu"]["name"]);
+      setInputs({
+        // shape: record["shape"],
+        size: record["size"],
+        amount: record["amount"],
+        information: record["information"],
       });
     }
 
@@ -62,8 +63,8 @@ export default function Edit() {
       window.alert(err.message || "An error has occurred.");
       return;
     }
-    // setAction("list");
-    navigate("/");
+    setAction("list");
+    navigate("/menuchoice");
   }
 
   // This following section will display the form that takes input from the user to update the data.
@@ -71,37 +72,51 @@ export default function Edit() {
     <div>
       <h3>Update Record</h3>
       <form onSubmit={onSubmit}>
-        {documents[item]?.map((data, index) => {
-          return (
-            <div key={index}>
-              {data.required ? (
-                <TextField
-                  name={data.name}
-                  label={data.label}
-                  type={data.type}
-                  onChange={handleChange}
-                  id={data.id}
-                  value={inputs[data.name]}
-                  required
-                />
-              ) : (
-                <TextField
-                  name={data.name}
-                  label={data.label}
-                  type={data.type}
-                  onChange={handleChange}
-                  id={data.id}
-                  value={inputs[data.name]}
-                />
-              )}
-              {errors[data.name] && (
-                <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-                  {errors[data.name]}
-                </div>
-              )}
+        <div>
+          <label>Menu {menuName}</label>
+          <TextField
+            name="size"
+            label="Size"
+            type="text"
+            onChange={handleChange}
+            id="size"
+            value={inputs["size"]}
+            required
+          />
+          {errors["size"] && (
+            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+              {errors["size"]}
             </div>
-          );
-        })}
+          )}
+          <TextField
+            name="amount"
+            label="Amount"
+            type="number"
+            onChange={handleChange}
+            id="amount"
+            value={inputs["amount"]}
+            required
+          />
+          {errors["amount"] && (
+            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+              {errors["amount"]}
+            </div>
+          )}
+          <TextField
+            name="information"
+            label="information"
+            type="text"
+            onChange={handleChange}
+            id="information"
+            value={inputs["information"]}
+            required
+          />
+          {errors["information"] && (
+            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+              {errors["information"]}
+            </div>
+          )}
+        </div>
 
         <br />
 

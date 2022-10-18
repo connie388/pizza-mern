@@ -5,24 +5,31 @@ import { documents } from "../data/documents";
 import { useContext } from "react";
 import { DataContext } from "../util/DataProvider";
 
-const Record = (props) => (
+const MenuChoiceRecord = (props) => (
   <tbody>
     <tr>
       {documents[props.item]?.map((data, index) => {
         return typeof props.record[data.name] === "boolean" ? (
-          <td key={index}>
+          <td key={`category_${index + 1}`}>
             {props.record[data.name] === true ? (
               <input type="checkbox" defaultChecked />
             ) : (
               <input type="checkbox" />
             )}
           </td>
+        ) : data.type === "array" ? (
+          <td key={`category_${index + 1}`}>
+            <div>{props.record[data?.name]["name"]}</div>
+          </td>
         ) : (
-          <td key={index}>{props.record[data.name]}</td>
+          <td key={`category_${index + 1}`}>{props.record[data?.name]}</td>
         );
       })}
       <td>
-        <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
+        <Link
+          className="btn btn-link"
+          to={`/edit/menuchoice/${props.record._id}`}
+        >
           Edit
         </Link>
         |
@@ -39,7 +46,7 @@ const Record = (props) => (
   </tbody>
 );
 
-export default function RecordList() {
+export default function MenuChoiceRecordList() {
   const [item, setItem, action, setAction] = useContext(DataContext);
   const [records, setRecords] = useState([]);
 
@@ -61,7 +68,6 @@ export default function RecordList() {
 
     getRecords();
 
-    return;
   }, [item]);
 
   // This method will delete a record
@@ -78,10 +84,11 @@ export default function RecordList() {
   function recordList() {
     return records?.map((record) => {
       return (
-        <Record
+        <MenuChoiceRecord
           item={item}
           record={record}
-          deleteRecord={() => deleteRecord(record._id)}
+          categoryId={record._id}
+          deleteRecord={(categoryId, id) => deleteRecord(categoryId, id)}
           key={record._id}
         />
       );
@@ -91,7 +98,7 @@ export default function RecordList() {
   // This following section will display the table with the records of individuals.
   return (
     <div>
-      <h3>Record List</h3>
+      <h3>Menu Choice Record List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>

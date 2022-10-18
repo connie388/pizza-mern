@@ -3,11 +3,10 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import useForm from "../util/useForm";
 import { TextField } from "../util/TextField";
-import { documents } from "../data/documents";
 import { useContext } from "react";
 import { DataContext } from "../util/DataProvider";
 
-export default function Edit() {
+export default function MenuChoiceByCategoryEdit() {
   const { handleChange, inputs, setInputs, errors } = useForm({});
   const [item, setItem, action, setAction] = useContext(DataContext);
   const params = useParams();
@@ -35,11 +34,11 @@ export default function Edit() {
         return;
       }
 
-      documents[item]?.map((data, index) => {
-        return setInputs((values) => ({
-          ...values,
-          [data.name]: record[data.name],
-        }));
+      setInputs({
+        shape: record["shape"],
+        size: record["size"],
+        amount: record["amount"],
+        information: record["information"],
       });
     }
 
@@ -63,7 +62,7 @@ export default function Edit() {
       return;
     }
     // setAction("list");
-    navigate("/");
+    navigate("/menuchoicebycategory");
   }
 
   // This following section will display the form that takes input from the user to update the data.
@@ -71,37 +70,63 @@ export default function Edit() {
     <div>
       <h3>Update Record</h3>
       <form onSubmit={onSubmit}>
-        {documents[item]?.map((data, index) => {
-          return (
-            <div key={index}>
-              {data.required ? (
-                <TextField
-                  name={data.name}
-                  label={data.label}
-                  type={data.type}
-                  onChange={handleChange}
-                  id={data.id}
-                  value={inputs[data.name]}
-                  required
-                />
-              ) : (
-                <TextField
-                  name={data.name}
-                  label={data.label}
-                  type={data.type}
-                  onChange={handleChange}
-                  id={data.id}
-                  value={inputs[data.name]}
-                />
-              )}
-              {errors[data.name] && (
-                <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-                  {errors[data.name]}
-                </div>
-              )}
+        <div>
+          <TextField
+            name="size"
+            label="Size"
+            type="text"
+            onChange={handleChange}
+            id="size"
+            value={inputs["size"]}
+            required
+          />
+          {errors["size"] && (
+            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+              {errors["size"]}
             </div>
-          );
-        })}
+          )}
+          <TextField
+            name="amount"
+            label="Amount"
+            type="number"
+            onChange={handleChange}
+            id="amount"
+            value={inputs["amount"]}
+            required
+          />
+          {errors["amount"] && (
+            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+              {errors["amount"]}
+            </div>
+          )}
+          <TextField
+            name="shape"
+            label="Shape"
+            type="text"
+            onChange={handleChange}
+            id="shape"
+            value={inputs["shape"]}
+          />
+          {errors["shape"] && (
+            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+              {errors["shape"]}
+            </div>
+          )}
+          <TextField
+            name="information"
+            label="information"
+            type="text"
+            onChange={handleChange}
+            id="information"
+            value={inputs["information"]}
+            required
+          />
+          {errors["information"] && (
+            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+              {errors["information"]}
+            </div>
+          )}
+        </div>
 
         <br />
 
