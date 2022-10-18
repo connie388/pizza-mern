@@ -18,9 +18,17 @@ const MenuRecord = (props) => (
             )}
           </td>
         ) : data.type === "array" ? (
-          <td key={`category_${index + 1}`}>
-            <div>{props.record[data?.name]["category"]}</div>
-          </td>
+          data?.name === "category" ? (
+            <td key={`category_${index + 1}`}>
+              <div>{props.record[data?.name]["category"]}</div>
+            </td>
+          ) : (
+            <td key={`category_${index + 1}`}>
+              {props.record[data?.name].map((data, idx) => {
+                return <div key={`addon_${idx + 1}`}>{data["category"]}</div>;
+              })}
+            </td>
+          )
         ) : (
           <td key={`category_${index + 1}`}>{props.record[data?.name]}</td>
         );

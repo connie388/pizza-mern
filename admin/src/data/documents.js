@@ -212,6 +212,19 @@ export const documents = {
       type: "text",
     },
     {
+      name: "addons",
+      label: "Addons",
+      type: "array",
+      list: [
+        {
+          name: "category",
+          label: "Category",
+          type: "text",
+          required: true,
+        },
+      ],
+    },
+    {
       name: "description",
       label: "Description",
       type: "text",

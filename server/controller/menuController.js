@@ -109,6 +109,7 @@ exports.findAll = async (req, res) => {
     .populate("type", "shape size amount information")
     .populate("choice", "size amount information")
     .populate("category")
+    .populate("addons")
     .then((menu) => res.status(200).json({ success: true, menu }))
     .catch((error) =>
       res.status(500).json({
@@ -124,6 +125,7 @@ exports.findById = (req, res) => {
   const filter = { _id: Object(id) };
   MenuModel.find(filter)
     .populate("category")
+    .populate("addons")
     .then((menu) => res.status(200).json({ success: true, menu }))
     .catch((err) =>
       res.status(400).json({

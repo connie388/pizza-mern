@@ -12,6 +12,20 @@ export default function MenuCreate() {
   const { handleChange, inputs, setInputs, errors } = useForm({});
   const [item, setItem, action, setAction] = useContext(DataContext);
   const [options, setOptions] = useState(null);
+  const [list, setList] = useState(null);
+  const [addons, setAddons] = useState([]);
+
+  function checkboxOnChange(e) {
+    let copy = addons;
+    if (copy.indexOf(e.target.value) === -1) {
+      copy.push(e.target.value);
+    } else {
+      copy.pop(e.target.value);
+    }
+
+    setAddons(copy);
+    console.log("addons=" + JSON.stringify(addons));
+  }
 
   useEffect(() => {
     async function getMenuCategory() {
@@ -24,8 +38,22 @@ export default function MenuCreate() {
         label: item.category,
       }));
       setOptions(option);
-      setInputs({ ...inputs, menu: option[0]?.value });
+      setInputs({ ...inputs, category: option[0]?.value });
     }
+
+    async function getToppingCategory() {
+      const data = await axios.get(
+        "http://localhost:4000/pizza/v1.0.0/order/toppingcategory"
+      );
+
+      const option = data.data?.toppingcategory.map((item) => ({
+        value: item._id,
+        label: item.category + " $" + item.price,
+      }));
+      setList(option);
+      setInputs({ ...inputs, addons: [] });
+    }
+    getToppingCategory();
     getMenuCategory();
   }, []);
 
@@ -34,12 +62,18 @@ export default function MenuCreate() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
-
+    // let temp = [];
+    // addons.map((data) => {
+    //   temp.push({ type: data });
+    // });
+    // console.log("temp=" + JSON.stringify(temp));
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newRecord = {
       ...inputs,
+      addons: addons,
     };
 
+    console.log("newRecord=" + JSON.stringify(newRecord));
     try {
       await axios.post(
         `http://localhost:4000/pizza/v1.0.0/order/${item}`,
@@ -63,8 +97,12 @@ export default function MenuCreate() {
     <div>
       <h3>Create New Record</h3>
       <form onSubmit={onSubmit}>
-        <label htmlFor="menu">Menu Category</label>
-        <select name="menu" value={inputs["menu"]} onChange={handleChange}>
+        <label htmlFor="category">Menu Category</label>
+        <select
+          name="category"
+          value={inputs["category"]}
+          onChange={handleChange}
+        >
           {options?.map((option, index) => {
             return (
               <option key={index} value={option.value}>
@@ -170,6 +208,20 @@ export default function MenuCreate() {
             </div>
           )}
         </div>
+        {list?.map((option, index) => {
+          return (
+            <div key={`checkbox_list_${index + 1}`}>
+              <label htmlFor={option.label}>{option.label}</label>
+              <input
+                type="checkbox"
+                name={option.label}
+                value={option.value}
+                onChange={checkboxOnChange}
+              />
+            </div>
+          );
+        })}
+
         <div className="form-group">
           <input type="submit" value="Add" className="btn btn-primary" />
         </div>

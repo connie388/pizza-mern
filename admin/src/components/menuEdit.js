@@ -12,6 +12,26 @@ export default function MenuEdit() {
   const params = useParams();
   const navigate = useNavigate();
   const [menuCategory, setMenuCategory] = useState("");
+  const [list, setList] = useState(null);
+  const [toppings, setToppings] = useState([]);
+  const [checked, setChecked] = useState({});
+
+  function checkboxOnChange(name, e) {
+    let checklist = checked;
+    let checkValue = !checked[name];
+    checklist = { ...checklist, [name]: checkValue };
+    setChecked(checklist);
+
+    let copy = toppings;
+    let index = copy.indexOf(e.target.value);
+    if (index === -1) {
+      copy.push(e.target.value);
+    } else {
+      copy.splice(index, 1);
+    }
+
+    setToppings(copy);
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -40,13 +60,42 @@ export default function MenuEdit() {
         name: record["name"],
         customize: record["customize"],
         new: record["new"],
+        addons: record["addons"],
         calory: record["calory"],
         amount: record["amount"],
         image: record["image"],
         description: record["description"],
       });
+      let temp = [];
+
+      let list = {};
+      for (var i = 0; i < record["addons"]?.length; i++) {
+        list = { ...list, [record["addons"][i].category]: true };
+        temp.push(record["addons"][i]._id);
+      }
+      setChecked(list);
+      setToppings(temp);
     }
 
+    async function getToppingCategory() {
+      const data = await axios.get(
+        "http://localhost:4000/pizza/v1.0.0/order/toppingcategory"
+      );
+
+      const option = data.data?.toppingcategory.map((item) => ({
+        value: item._id,
+        label: item.category,
+      }));
+      setList(option);
+
+      let list = {};
+      for (var i = 0; i < data.data?.toppingcategory.length; i++) {
+        list = { ...list, [data.data?.toppingcategory[i].category]: false };
+      }
+      setChecked(list);
+    }
+
+    getToppingCategory();
     fetchData();
 
     return;
@@ -55,7 +104,7 @@ export default function MenuEdit() {
   async function onSubmit(e) {
     e.preventDefault();
 
-    const newRecord = { ...inputs };
+    const newRecord = { ...inputs, addons: toppings };
     // This will send a post request to update the data in the database.
     try {
       await axios.put(
@@ -95,7 +144,7 @@ export default function MenuEdit() {
             <TextField
               name="customize"
               label="Customize"
-              type="text"
+              type="checkbox"
               onChange={handleChange}
               id="customize"
               value={inputs["customize"]}
@@ -108,7 +157,7 @@ export default function MenuEdit() {
             <TextField
               name="new"
               label="New Item"
-              type="text"
+              type="checkbox"
               onChange={handleChange}
               id="new"
               value={inputs["new"]}
@@ -138,7 +187,6 @@ export default function MenuEdit() {
               onChange={handleChange}
               id="amount"
               value={inputs["amount"]}
-              required
             />
             {errors["amount"] && (
               <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
@@ -173,6 +221,21 @@ export default function MenuEdit() {
               </div>
             )}
           </div>
+          {list?.map((option, index) => {
+            return (
+              <div key={`checkbox_list_${index + 1}`}>
+                <label htmlFor={option.label}>{option.label}</label>
+                <input
+                  type="checkbox"
+                  name={option.label}
+                  value={option.value}
+                  checked={checked[option.label]}
+                  onChange={(e) => checkboxOnChange(option.label, e)}
+                />
+              </div>
+            );
+          })}
+
           {errors["information"] && (
             <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
               {errors["information"]}
