@@ -21,7 +21,7 @@ export default function ToppingsCreate() {
 
       const option = data.data?.toppingcategory.map((item) => ({
         value: item._id,
-        label: item.category + " $" + item.price,
+        label: item.category,
       }));
       setOptions(option);
       setInputs({ ...inputs, category: option[0].value });
@@ -60,7 +60,7 @@ export default function ToppingsCreate() {
 
   // This following section will display the form that takes the input from the user.
   return (
-    <div>
+    <div className="m-5">
       <h3>Create New Record</h3>
       <form onSubmit={onSubmit}>
         <label htmlFor="category">Category</label>

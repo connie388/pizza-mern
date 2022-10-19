@@ -121,7 +121,7 @@ export default function MenuEdit() {
 
   // This following section will display the form that takes input from the user to update the data.
   return (
-    <div>
+    <div className="m-5">
       <h3>Update Record</h3>
       <form onSubmit={onSubmit}>
         <div>
@@ -221,11 +221,18 @@ export default function MenuEdit() {
               </div>
             )}
           </div>
+          <label>Toppings Choice:</label>
           {list?.map((option, index) => {
             return (
-              <div key={`checkbox_list_${index + 1}`}>
-                <label htmlFor={option.label}>{option.label}</label>
+              <div
+                className="inline-category"
+                key={`checkbox_list_${index + 1}`}
+              >
+                <label className="data" htmlFor={option.label}>
+                  {option.label}
+                </label>
                 <input
+                  className="data"
                   type="checkbox"
                   name={option.label}
                   value={option.value}

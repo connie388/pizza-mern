@@ -21,11 +21,11 @@ const MenuChoiceByCategoryRecord = (props) => (
           <td key={`category_${index + 1}`}>
             {props.record[data.name]?.map((d, i) => {
               return (
-                <div className="inline" key={`detail_${i + 1}`}>
-                  <div>{d.size.padEnd(15, " ")}</div>
-                  <div>{d.amount.toString().trim().padStart(20, " ")}</div>
-                  <div>{d.information}</div>
-                  <div>{d.shape.padEnd(15, " ")}</div>
+                <div className="inline-category" key={`detail_${i + 1}`}>
+                  <div className="data">{d.size}</div>
+                  <div className="data">{d.amount}</div>
+                  <div className="data">{d.information}</div>
+                  <div className="data">{d.shape}</div>
                   <div>
                     <Link
                       className="btn btn-link"

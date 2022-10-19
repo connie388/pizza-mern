@@ -6,18 +6,58 @@
   font-size: 20px;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: space-between;
+}
 html,
 body {
   height: 100%;
 }
 
-input[type="text"] {
-  width: 80%;
-  margin: 20px;
-  padding: 12px;
-  border-radius: 3px;
+/* Style inputs */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
+/* Style the submit button */
+input[type="submit"] {
+  width: 100%;
+  background-color: #04aa6d;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Add a background color to the submit button on mouse-over */
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 8px;
+}
 input:invalid {
   background-color: #ffdddd;
 }
@@ -35,4 +75,14 @@ input:invalid {
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+}
+
+.inline-category {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.data {
+  text-align: left;
+  width: 20%;
 }

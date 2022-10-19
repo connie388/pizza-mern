@@ -67,7 +67,7 @@ export default function MenuChoiceByCategoryEdit() {
 
   // This following section will display the form that takes input from the user to update the data.
   return (
-    <div>
+    <div className="m-5">
       <h3>Update Record</h3>
       <form onSubmit={onSubmit}>
         <div>

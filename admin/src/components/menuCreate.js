@@ -48,7 +48,7 @@ export default function MenuCreate() {
 
       const option = data.data?.toppingcategory.map((item) => ({
         value: item._id,
-        label: item.category + " $" + item.price,
+        label: item.category,
       }));
       setList(option);
       setInputs({ ...inputs, addons: [] });
@@ -62,11 +62,7 @@ export default function MenuCreate() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
-    // let temp = [];
-    // addons.map((data) => {
-    //   temp.push({ type: data });
-    // });
-    // console.log("temp=" + JSON.stringify(temp));
+
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newRecord = {
       ...inputs,
@@ -94,137 +90,146 @@ export default function MenuCreate() {
 
   // This following section will display the form that takes the input from the user.
   return (
-    <div>
+    <div className="m-5">
       <h3>Create New Record</h3>
       <form onSubmit={onSubmit}>
-        <label htmlFor="category">Menu Category</label>
-        <select
-          name="category"
-          value={inputs["category"]}
-          onChange={handleChange}
-        >
-          {options?.map((option, index) => {
+        <fieldset class="flex">
+          <label htmlFor="category">Menu Category</label>
+          <select
+            name="category"
+            value={inputs["category"]}
+            onChange={handleChange}
+          >
+            {options?.map((option, index) => {
+              return (
+                <option key={index} value={option.value}>
+                  {option.label}
+                </option>
+              );
+            })}
+          </select>
+
+          <div>
+            <TextField
+              name="name"
+              label="Name"
+              type="text"
+              onChange={handleChange}
+              id="name"
+              value={inputs["name"]}
+              required
+            />
+            {errors["name"] && (
+              <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                {errors["name"]}
+              </div>
+            )}
+            <TextField
+              name="customize"
+              label="Customize"
+              type="checkbox"
+              onChange={handleChange}
+              id="customize"
+              value={inputs["customize"]}
+            />
+            {errors["customize"] && (
+              <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                {errors["customize"]}
+              </div>
+            )}
+            <TextField
+              name="new"
+              label="New Item"
+              type="checkbox"
+              onChange={handleChange}
+              id="new"
+              value={inputs["new"]}
+            />
+            {errors["new"] && (
+              <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                {errors["new"]}
+              </div>
+            )}
+            <TextField
+              name="calory"
+              label="Calory"
+              type="text"
+              onChange={handleChange}
+              id="calory"
+              value={inputs["calory"]}
+            />
+            {errors["calory"] && (
+              <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                {errors["calory"]}
+              </div>
+            )}
+            <TextField
+              name="amount"
+              label="Amount"
+              type="number"
+              onChange={handleChange}
+              id="amount"
+              value={inputs["amount"]}
+              required
+            />
+            {errors["amount"] && (
+              <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                {errors["amount"]}
+              </div>
+            )}
+            <TextField
+              name="image"
+              label="Image URL"
+              type="text"
+              onChange={handleChange}
+              id="image"
+              value={inputs["image"]}
+            />
+            {errors["image"] && (
+              <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                {errors["image"]}
+              </div>
+            )}
+            <TextField
+              name="description"
+              label="Description"
+              type="text"
+              onChange={handleChange}
+              id="description"
+              value={inputs["description"]}
+              required
+            />
+            {errors["description"] && (
+              <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                {errors["description"]}
+              </div>
+            )}
+          </div>
+          <label>Toppings Choice:</label>
+          {list?.map((option, index) => {
             return (
-              <option key={index} value={option.value}>
-                {option.label}
-              </option>
+              <div
+                className="inline-category"
+                key={`checkbox_list_${index + 1}`}
+              >
+                <label className="data" htmlFor={option.label}>
+                  {option.label}
+                </label>
+                <input
+                  className="data"
+                  type="checkbox"
+                  name={option.label}
+                  value={option.value}
+                  onChange={checkboxOnChange}
+                />
+              </div>
             );
           })}
-        </select>
 
-        <div>
-          <TextField
-            name="name"
-            label="Name"
-            type="text"
-            onChange={handleChange}
-            id="name"
-            value={inputs["name"]}
-            required
-          />
-          {errors["name"] && (
-            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-              {errors["name"]}
-            </div>
-          )}
-          <TextField
-            name="customize"
-            label="Customize"
-            type="checkbox"
-            onChange={handleChange}
-            id="customize"
-            value={inputs["customize"]}
-          />
-          {errors["customize"] && (
-            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-              {errors["customize"]}
-            </div>
-          )}
-          <TextField
-            name="new"
-            label="New Item"
-            type="checkbox"
-            onChange={handleChange}
-            id="new"
-            value={inputs["new"]}
-          />
-          {errors["new"] && (
-            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-              {errors["new"]}
-            </div>
-          )}
-          <TextField
-            name="calory"
-            label="Calory"
-            type="text"
-            onChange={handleChange}
-            id="calory"
-            value={inputs["calory"]}
-          />
-          {errors["calory"] && (
-            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-              {errors["calory"]}
-            </div>
-          )}
-          <TextField
-            name="amount"
-            label="Amount"
-            type="number"
-            onChange={handleChange}
-            id="amount"
-            value={inputs["amount"]}
-            required
-          />
-          {errors["amount"] && (
-            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-              {errors["amount"]}
-            </div>
-          )}
-          <TextField
-            name="image"
-            label="Image URL"
-            type="text"
-            onChange={handleChange}
-            id="image"
-            value={inputs["image"]}
-          />
-          {errors["image"] && (
-            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-              {errors["image"]}
-            </div>
-          )}
-          <TextField
-            name="description"
-            label="Description"
-            type="text"
-            onChange={handleChange}
-            id="description"
-            value={inputs["description"]}
-            required
-          />
-          {errors["description"] && (
-            <div role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-              {errors["description"]}
-            </div>
-          )}
-        </div>
-        {list?.map((option, index) => {
-          return (
-            <div key={`checkbox_list_${index + 1}`}>
-              <label htmlFor={option.label}>{option.label}</label>
-              <input
-                type="checkbox"
-                name={option.label}
-                value={option.value}
-                onChange={checkboxOnChange}
-              />
-            </div>
-          );
-        })}
-
-        <div className="form-group">
-          <input type="submit" value="Add" className="btn btn-primary" />
-        </div>
+          <div className="form-group">
+            <input type="submit" value="Add" className="btn btn-primary" />
+          </div>
+        </fieldset>
       </form>
     </div>
   );

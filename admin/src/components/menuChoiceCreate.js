@@ -39,7 +39,7 @@ export default function MenuChoiceCreate() {
     const newRecord = {
       ...inputs,
     };
-    
+
     try {
       await axios.post(
         `http://localhost:4000/pizza/v1.0.0/order/${item}`,
@@ -60,7 +60,7 @@ export default function MenuChoiceCreate() {
 
   // This following section will display the form that takes the input from the user.
   return (
-    <div>
+    <div className="m-5">
       <h3>Create New Record</h3>
       <form onSubmit={onSubmit}>
         <label htmlFor="menu">Menu</label>

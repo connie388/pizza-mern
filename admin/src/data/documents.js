@@ -66,7 +66,7 @@ export const documents = {
     {
       name: "price",
       label: "Price",
-      type: "Float",
+      type: "number",
       required: true,
     },
   ],
